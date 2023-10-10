@@ -1,0 +1,21 @@
+# https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+
+version: 0.2
+
+env:
+  variables:
+    APP:
+
+phases:
+
+  install:
+    on-failure: ABORT
+    runtime-versions:
+      python: 3.10
+    commands:
+    - pip install -r requirements.txt
+
+  build:
+    on-failure: ABORT
+    commands:
+    - SKIP=no-commit-to-branch pre-commit run --all-files
